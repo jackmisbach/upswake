@@ -67,14 +67,14 @@ jobs:
 
       - name: 🔑 Log in to Docker
         uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2 # v4
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name != 'push' }}
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: 🔑 Login to GitHub Container Registry
         uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2 # v4
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name != 'push' }}
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -117,7 +117,7 @@ jobs:
           key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
 
       - name: 💉 Inject go-build-cache
-        uses: reproducible-containers/buildkit-cache-dance@6f699a72a59e4252f05a7435430009b77e25fe06 # v3.3.1
+        uses: jackmisbach/buildkit-cache-dance@758470c6ce19f1a6b2beaf3850c823e94f0d0763 # rootless testing
         with:
           builder: ${{ steps.setup-buildx.outputs.name }}
           dockerfile: Containerfile
