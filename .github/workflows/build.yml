@@ -167,7 +167,7 @@ jobs:
           target: "minimal"
           context: .
           file: ./Containerfile
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'push' }}
           cache-from: type=gha # caching actually increases build time from 5m to 8m
           cache-to: type=gha,mode=max
           build-args: |
