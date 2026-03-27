@@ -117,7 +117,7 @@ jobs:
           key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
 
       - name: 💉 Inject go-build-cache
-        uses: jackmisbach/buildkit-cache-dance@758470c6ce19f1a6b2beaf3850c823e94f0d0763 # rootless testing
+        uses: jackmisbach/buildkit-cache-dance@758470c6ce19f1a6b2beaf3850c823e94f0d0763 # rootless test
         with:
           builder: ${{ steps.setup-buildx.outputs.name }}
           dockerfile: Containerfile
